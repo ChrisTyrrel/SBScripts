@@ -14,21 +14,37 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+# Join the channel specified.
+
 bind pub - !join pub:join
 proc pub:join {nick host hand chan text} {   
+    
+    # We will take the first word after !join and use it as the channel to join.
     set c2j [lindex $text 0]
+    	
+    	# We must check if the handle has the "m" (Admin) flag. We also must not be on the requested channel.
         if {[matchattr $hand m $chan] == 1 || [botonchan $c2j] == 0} {
-			putserv "PRIVMSG #SpadeTest :Joined $c2j by request of $nick."
+        	
+        		# We shall inform the admin channel.
+			putserv "PRIVMSG #AdminChannel :Joined $c2j by request of $nick."
+		
+			# We add it to our internal list, then join specified channel.
 			channel add $c2j
    		 } else {
+   		 	
+   		 	# We will PM the user if they are not an admin ("M" flag), or we are already on the specified channek.
         		putserv "PRIVMSG $nick :Denied."
         }
     }
 
-
+# Part the channel specified.
 bind pub - !part pub:part
 proc pub:part {nick host hand chan text} {
+    
+    # We will take the first word after !part and use it as the channel to part.
     set c2p [lindex $text 0]
+    	
+    	# We must check if the handle has the "m" (Admin) flag. We also must not be on the requested channel. 
         if {[matchattr $hand m $chan] == 1 || [botonchan $c2p] == 1} {
         channel remove $c2p
 	putserv "PRIVMSG #SpadeTest :Parted $c2p by request of $nick."
