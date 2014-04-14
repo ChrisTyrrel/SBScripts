@@ -68,7 +68,7 @@ proc pub:bots {nick host hand chan text} {
 global AdminChan
 	set bots [botlist]
 	if {$chan == $AdminChan && [isop $nick $chan]} {
-	puthelp $AdminChan "Bots Connected : $bots"
+	puthelp "PRIVMSG $AdminChan :Bots Connected : $bots"
 	} else {
 		return 1
 	}
