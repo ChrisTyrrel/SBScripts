@@ -17,6 +17,8 @@
 bind pub - !relay pub:relay
 bind pub - !announce pub:announce
 bind pub - !gban pub:gban
+bind pub - !link pub:link
+bind pub - !bots pub:bots
 
 proc pub:relay {nick host hand chan text} {
 global AdminChan network
@@ -53,5 +55,24 @@ global AdminChan MainChan
 		return 1
 	}
 }
+proc pub:link {nick host hand chan text} {
+global AdminChan
+	set b2l [lindex $text 0]
+		if {$chan == $AdminChan && [isop $nick $chan]} {
+		link $b2l
+		} else {
+		return 1
+	}	
+}
+proc pub:bots {nick host hand chan text} {
+global AdminChan
+	set bots [botlist]
+	if {$chan == $AdminChan && [isop $nick $chan]} {
+	puthelp $AdminChan "Bots Connected : $bots"
+	} else {
+		return 1
+	}
+}
+		
 	
 	
