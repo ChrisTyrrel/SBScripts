@@ -111,3 +111,13 @@ global AdminChan
 		die
 	}
 }
+
+proc pub:version {nick host hand chan text} {
+global AdminChan SBScriptsVersion
+	if {$chan == $AdminChan} {
+		puthelp "PRIVMSG $AdminChan :Currently running SBScripts Version $SBScriptsVersion."
+	} else {
+		return 1
+	}
+}
+
