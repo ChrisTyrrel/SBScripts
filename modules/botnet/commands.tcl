@@ -25,7 +25,7 @@ global AdminChan network
 	set relnick [lindex $text 0]
 	set rel [lrange $text 1 end]
 		if {$chan == $AdminChan} {
-		putbot $relnick "RELAY :($network/$nick) $rel"
+		putbot $relnick "RELAY :($nick@$network) $rel"
 	} else {
 		puthelp "PRIVMSG #AdminChannel :Nope"
 	}
