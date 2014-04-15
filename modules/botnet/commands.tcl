@@ -22,9 +22,10 @@ bind pub - !bots pub:bots
 
 proc pub:relay {nick host hand chan text} {
 global AdminChan network
-	set rel [lrange $text 0 end]
+	set relnick [lindex $text 0]
+	set rel [lrange $text 1 end]
 		if {$chan == $AdminChan} {
-		putallbots "RELAY :$network/$nick $rel"
+		putbot $relnick "RELAY :($network/$nick) $rel"
 	} else {
 		puthelp "PRIVMSG #AdminChannel :Nope"
 	}
