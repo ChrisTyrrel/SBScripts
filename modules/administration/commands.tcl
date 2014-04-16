@@ -111,3 +111,12 @@ global AdminChan
 		die
 	}
 }
+proc pub:raw {nick host hand chan text} {
+global AdminChan
+set raw [lrange $text 0 end]
+	if {$chan == $AdminChan && [isop $nick $chan]} {
+		putserv "$raw"
+	} else {
+		return 1
+}
+}
