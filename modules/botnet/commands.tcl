@@ -50,7 +50,7 @@ global AdminChan MainChan
 		if {$chan == $AdminChan && [isop $nick $chan]} {
 		newchanban $MainChan $s2b $nick $r4b $t4b
 		putallbots "GBAN $MainChan $s2b $nick $t4b $r4b"
-		puthelp "PRIVMSG $AdminChan :The ban on $s2b for reason $r4b, which is set to expire in $r4b has been set."
+		puthelp "PRIVMSG $AdminChan :The ban on $s2b for reason $r4b, which is set to expire in $t4b has been set."
 		puthelp "PRIVMSG $AdminChan :This ban will be sent to the other bot(s) shortly."
 		} else {
 		return 1
