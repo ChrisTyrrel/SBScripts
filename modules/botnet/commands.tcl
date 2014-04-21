@@ -24,7 +24,7 @@ global AdminChan network
 		if {$chan == $AdminChan} {
 		putallbots "RELAY :$network/$nick $rel"
 	} else {
-		puthelp "PRIVMSG #AdminChannel :Nope"
+		putnow "PRIVMSG #AdminChannel :Nope"
 	}
 }
 
@@ -33,9 +33,9 @@ global AdminChan MainChan
 	set grel [lrange $text 0 end]
 		if {$chan == $AdminChan} {
 		putallbots "GRELAY Announcement ($nick) $grel"
-		putserv "PRIVMSG $MainChan :Announcement ($nick) $grel"
+		putnow "PRIVMSG $MainChan :Announcement ($nick) $grel"
 	} else {
-		puthelp "PRIVMSG #AdminChannel :Nope"
+		putnow "PRIVMSG #AdminChannel :Nope"
 	}
 }
 
@@ -47,8 +47,8 @@ global AdminChan MainChan
 		if {$chan == $AdminChan && [isop $nick $chan]} {
 		newchanban $MainChan $s2b $nick $r4b $t4b
 		putallbots "GBAN $MainChan $s2b $nick $t4b $r4b"
-		puthelp "PRIVMSG $AdminChan :The ban on $s2b for reason $r4b, which is set to expire in $r4b has been set."
-		puthelp "PRIVMSG $AdminChan :This ban will be sent to the other bot(s) shortly."
+		putnow "PRIVMSG $AdminChan :The ban on $s2b for reason $r4b, which is set to expire in $r4b has been set."
+		putnow "PRIVMSG $AdminChan :This ban will be sent to the other bot(s) shortly."
 		} else {
 		return 1
 	}
