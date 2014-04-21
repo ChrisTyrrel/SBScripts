@@ -112,7 +112,7 @@ global AdminChan
 	channel set $c2c $s2c
 	} else {
 		putnow "NOTICE $nick :You aren't authorized to use this command."
-			putnow "PRIVMSG #SpadeTest :$nick attempted to use the !chanset command but was denied."
+			putnow "PRIVMSG $AdminChan :$nick attempted to use the !chanset command but was denied."
 		}
 	}
 
