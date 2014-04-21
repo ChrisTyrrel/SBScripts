@@ -40,11 +40,11 @@ global AdminChan Owner
 	set c2j [lindex $text 0]
 		if {$chan == $AdminChan && [isop $nick $chan] == 1} {
 			channel add $c2j
-			puthelp "PRIVMSG $AdminChan :Joined $c2j by order of $nick."
+			putnow "PRIVMSG $AdminChan :Joined $c2j by order of $nick."
 			} elseif {$nick == $owner} {
 				channel add $c2j
-				puthelp "NOTICE $nick :I have joined $c2j."
-				puthelp "PRIVMSG $AdminChan :Joined $c2j by order of $nick."
+				putnow "NOTICE $nick :I have joined $c2j."
+				putnow "PRIVMSG $AdminChan :Joined $c2j by order of $nick."
 			
 		} else {
 			return 1
@@ -68,12 +68,12 @@ global AdminChan Owner
 
 
 		# Again, we inform the admin channel.
-			putserv "PRIVMSG $AdminChan :Parted $c2p by request of $nick."
+			putnow "PRIVMSG $AdminChan :Parted $c2p by request of $nick."
     
 		} elseif {$nick == $owner && $c2j== ""} {
 			channel remove $chan
-			puthelp "NOTICE $nick :I have parted $c2p."
-			puthelp "PRIVMSG $AdminChan :Parted $c2p by order of $nick."
+			putnow "NOTICE $nick :I have parted $c2p."
+			putnow "PRIVMSG $AdminChan :Parted $c2p by order of $nick."
 	
 	} else {
 
@@ -94,7 +94,7 @@ global AdminChan
         	rehash
 		
 		# Now, we inform the admin channel.
-            	puthelp "PRIVMSG $AdminChan :Rehashed by order of $nick."
+            	putnow "PRIVMSG $AdminChan :Rehashed by order of $nick."
     } else {
 
 		# We will say the script has been completed despite the user not being an admin ("M" flag).
@@ -108,18 +108,18 @@ global AdminChan
 	set c2c [lindex $text 0]
 	set s2c [lrange $text 1 end]
 	if {[matchattr $hand m $c2c] == 1} {
-	puthelp "PRIVMSG $AdminChan :Changing settings $s2c on $c2c by order of $nick."
+	putnow "PRIVMSG $AdminChan :Changing settings $s2c on $c2c by order of $nick."
 	channel set $c2c $s2c
 	} else {
-		puthelp "NOTICE $nick :You aren't authorized to use this command."
-			puthelp "PRIVMSG #SpadeTest :$nick attempted to use the !chanset command but was denied."
+		putnow "NOTICE $nick :You aren't authorized to use this command."
+			putnow "PRIVMSG #SpadeTest :$nick attempted to use the !chanset command but was denied."
 		}
 	}
 
 proc pub:shutdown {nick host hand chan text} {
 global AdminChan
 	if {$chan == $AdminChan && [isop $nick $AdminChan] == 1} {
-		puthelp "PRIVMSG $AdminChan :Shutting down by order of $nick."
+		putnow "PRIVMSG $AdminChan :Shutting down by order of $nick."
 		die
 	}
 }
@@ -127,7 +127,7 @@ proc pub:raw {nick host hand chan text} {
 global AdminChan
 set raw [lrange $text 0 end]
 	if {$chan == $AdminChan && [isop $nick $chan]} {
-		putserv "$raw"
+		putnow "$raw"
 	} else {
 		return 1
 }
