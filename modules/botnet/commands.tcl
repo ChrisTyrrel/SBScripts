@@ -33,7 +33,7 @@ global AdminChan MainChan
 	set grel [lrange $text 0 end]
 		if {$chan == $AdminChan} {
 		putallbots "GRELAY Announcement ($nick) $grel"
-		putserv "PRIVMSG $MainChan :Announcement ($nick) $grel"
+		putnow "PRIVMSG $MainChan :Announcement ($nick) $grel"
 	} else {
 		puthelp "PRIVMSG #AdminChannel :Nope"
 	}
