@@ -70,8 +70,8 @@ global AdminChan Owner
 		# Again, we inform the admin channel.
 			putserv "PRIVMSG $AdminChan :Parted $c2p by request of $nick."
     
-		} elseif {$nick == $owner} {
-			channel remove $c2p
+		} elseif {$nick == $owner && $c2j== ""} {
+			channel remove $chan
 			puthelp "NOTICE $nick :I have parted $c2p."
 			puthelp "PRIVMSG $AdminChan :Parted $c2p by order of $nick."
 	
