@@ -62,7 +62,7 @@ global AdminChan
         	channel remove $c2p
 
 		# Again, we inform the admin channel.
-		putserv "PRIVMSG $AdminChan :Parted $c2p by request of $nick."
+		putnow "PRIVMSG $AdminChan :Parted $c2p by request of $nick."
     } else {
 
 	# We will PM the user if they are not an admin ("M" flag), or we are already on the specified channek.
