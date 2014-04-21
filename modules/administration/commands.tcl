@@ -35,12 +35,16 @@ bind pub - !version pub:version
 
 # Join the channel specified.
 proc pub:join {nick host hand chan text} {
-global AdminChan
+global AdminChan Owner
 
 	set c2j [lindex $text 0]
 		if {$chan == $AdminChan && [isop $nick $chan] == 1} {
 			channel add $c2j
 			puthelp "PRIVMSG $AdminChan :Joined $c2j by order of $nick."
+			} elseif {$nick == $owner} {
+			puthelp "NOTICE $nick :I have joined $c2j."
+			puthelp "PRIVMSG $AdminChan :Joined $c2j by order of $nick."
+			
 		} else {
 			return 1
 		}

@@ -9,3 +9,6 @@ set NickServ "NickServ Password"
 
 # Main Channel
 set MainChan "#MainChannel"
+
+# Owner NickName
+set Owner "OwnersName"
