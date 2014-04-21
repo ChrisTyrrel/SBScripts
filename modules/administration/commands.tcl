@@ -42,8 +42,9 @@ global AdminChan Owner
 			channel add $c2j
 			puthelp "PRIVMSG $AdminChan :Joined $c2j by order of $nick."
 			} elseif {$nick == $owner} {
-			puthelp "NOTICE $nick :I have joined $c2j."
-			puthelp "PRIVMSG $AdminChan :Joined $c2j by order of $nick."
+				channel add $c2j
+				puthelp "NOTICE $nick :I have joined $c2j."
+				puthelp "PRIVMSG $AdminChan :Joined $c2j by order of $nick."
 			
 		} else {
 			return 1
@@ -54,7 +55,7 @@ global AdminChan Owner
 # Part the channel specified.
 
 proc pub:part {nick host hand chan text} {
-global AdminChan
+global AdminChan Owner
     
     # We will take the first word after !part and use it as the channel to part.
     set c2p [lindex $text 0]
@@ -65,9 +66,16 @@ global AdminChan
 		# We remove it from our internal list, then part the specified channel.
         	channel remove $c2p
 
+
 		# Again, we inform the admin channel.
-		putserv "PRIVMSG $AdminChan :Parted $c2p by request of $nick."
-    } else {
+			putserv "PRIVMSG $AdminChan :Parted $c2p by request of $nick."
+    
+		} elseif {$nick == $owner} {
+			channel remove $c2p
+			puthelp "NOTICE $nick :I have parted $c2p."
+			puthelp "PRIVMSG $AdminChan :Parted $c2p by order of $nick."
+	
+	} else {
 
 	# We will PM the user if they are not an admin ("M" flag), or we are already on the specified channek.
        	return 1
