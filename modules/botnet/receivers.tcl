@@ -20,4 +20,5 @@ proc bot:GLOBAL {from-bot command text} {
 Global AdminChan MainChan
 	set command [lindex $text 1]
 		if {$command == "rehash} {
-			
+		}
+	}
