@@ -16,3 +16,7 @@ set Owner "OwnersName"
 # Is this part of a botnet? 1= Yes, 0 = No.
 
 set BotNetExist "0"
+
+# Custom Command prefix
+
+set Prefix "!"
