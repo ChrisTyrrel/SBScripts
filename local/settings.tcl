@@ -12,3 +12,7 @@ set MainChan "#MainChannel"
 
 # Owner NickName
 set Owner "OwnersName"
+
+# Is this part of a botnet? 1= Yes, 0 = No.
+
+set BotNetExist "0"
