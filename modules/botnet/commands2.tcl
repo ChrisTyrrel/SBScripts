@@ -29,6 +29,7 @@ Global AdminChan Owner MainChan
 				putnow "PRIVMSG $AdminChan :$nick is globally announcing ($announcemsg)"
 				putnow "PRIVMSG $MainChan :\002Announcement\002 from \002$nick\002 : \026$announcemsg\026"
 				putallbots "GANNOUNCE $nick $announcemsg"
+				putnow "PRIVMSG $AdminChan :Announcement has been made locally."
 		
 		} elseif {$cmd == "shutdown"} {
 				putnow "PRIVMSG $AdminChan :Global shutdown initiated by $nick."
@@ -43,6 +44,24 @@ Global AdminChan Owner MainChan
 			putallbots "GRESTART $nick"
 			putnow "PRIVMSG $AdminChan :Restarting."
 			restart
+			
+		} elseif {$cmd == "topic"} {
+			set topic [lrange $text 1 end]
+				putnow "PRIVMSG $AdminChan :Global topic change on $MainChan initiated by $nick."
+				putnow "PRIVMSG $AdminChan :New topic ($topic) has been sent to other bot(s) on botnet."
+				putallbots "GTOPIC $nick $topic"
+				putnow "TOPIC $MainChan :$topic"
+				putnow "PRIVMSG $AdminChan :Topic has been applied locally."
+				
+		} elseif {$cmd == "ban"} {
+			set o2b [lindex $text 0]
+			set t2b [lindex $text 1]
+			set r4b [lrange $text 2 end]
+				putnow "PRIVMSG $AdminChan :Global ban on $o2b on $MainChan has been activated by $nick."
+				putnow "PRIVMSG $AdminChan :New ban ($o2b) has been sent to other bot(s) on botnet."
+				putallbots "GBAN $nick $o2b $t2b $r4b"
+				newchanban $MainChan $o2b $nick $r4b $t2b
+				putnow "PRIVMSG $AdminChan :Ban has been applied locally."
 		
 		} else {
 			putnow "PRIVMSG $AdminChan :The command ($cmd) doesn't exist."
