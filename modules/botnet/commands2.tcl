@@ -20,7 +20,7 @@ Global AdminChan Owner MainChan
 	set cmd [lindex $text 0]
 		if {$cmd == "rehash"} {
 			putnow "PRIVMSG $AdminChan :Global rehash initiated by $nick."
-			putallbots "GREHASH $nick"
+			putallbots "GLOBAL REHASH $nick"
 			rehash
 			putnow "PRIVMSG $AdminChan :Local bot has been rehashed."
 			
@@ -28,20 +28,20 @@ Global AdminChan Owner MainChan
 			set announcemsg [lrange $text 1 end]
 				putnow "PRIVMSG $AdminChan :$nick is globally announcing ($announcemsg)"
 				putnow "PRIVMSG $MainChan :\002Announcement\002 from \002$nick\002 : \026$announcemsg\026"
-				putallbots "GANNOUNCE $nick $announcemsg"
+				putallbots "GLOBAL ANNOUNCE $nick $announcemsg"
 				putnow "PRIVMSG $AdminChan :Announcement has been made locally."
 		
 		} elseif {$cmd == "shutdown"} {
 				putnow "PRIVMSG $AdminChan :Global shutdown initiated by $nick."
 				putnow "PRIVMSG $AdminChan :Sending shutdown command to other bot(s) on botnet."
-				putallbots "GSHUTDOWN $nick"
+				putallbots "GLOBAL SHUTDOWN $nick"
 				putnow "PRIVMSG $AdminChan :Shutting down."
 				die "Shutdown by $nick."
 		
 		} elseif {$cmd == "restart"} {
 			putnow "PRIVMSG $AdminChan :Global restart initiated by $nick."
 			putnow "PRIVMSG $AdminChan :Sending shutdown command to other bot(s) on botnet."
-			putallbots "GRESTART $nick"
+			putallbots "GLOBAL RESTART $nick"
 			putnow "PRIVMSG $AdminChan :Restarting."
 			restart
 			
@@ -49,7 +49,7 @@ Global AdminChan Owner MainChan
 			set topic [lrange $text 1 end]
 				putnow "PRIVMSG $AdminChan :Global topic change on $MainChan initiated by $nick."
 				putnow "PRIVMSG $AdminChan :New topic ($topic) has been sent to other bot(s) on botnet."
-				putallbots "GTOPIC $nick $topic"
+				putallbots "GLOBAL TOPIC $nick $topic"
 				putnow "TOPIC $MainChan :$topic"
 				putnow "PRIVMSG $AdminChan :Topic has been applied locally."
 				
@@ -59,7 +59,7 @@ Global AdminChan Owner MainChan
 			set r4b [lrange $text 2 end]
 				putnow "PRIVMSG $AdminChan :Global ban on $o2b on $MainChan has been activated by $nick."
 				putnow "PRIVMSG $AdminChan :New ban ($o2b) has been sent to other bot(s) on botnet."
-				putallbots "GBAN $nick $o2b $t2b $r4b"
+				putallbots "GLOBAL BAN $nick $o2b $t2b $r4b"
 				newchanban $MainChan $o2b $nick $r4b $t2b
 				putnow "PRIVMSG $AdminChan :Ban has been applied locally."
 		
