@@ -15,8 +15,8 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bind pub m !g pub:global
-pub:global {nick host hand chan text} {
-Global AdminChan Owner MainChan
+proc pub:global {nick host hand chan text} {
+global AdminChan Owner MainChan
 	set cmd [lindex $text 0]
 		if {$cmd == "rehash"} {
 			putnow "PRIVMSG $AdminChan :Global rehash initiated by $nick."
