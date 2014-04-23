@@ -26,13 +26,10 @@ source "$SBScriptsLocal/settings.tcl"
 	putlog "SBScripts settings have been loaded from $SBScriptsLocal."
 source "$SBScriptsModules/administration/commands.tcl"
 	putlog "SBScripts administration commands have been loaded."
-if {$BotNetExist == "1"} {
 	source "$SBScriptsModules/botnet/commands.tcl"
 	putlog "SBScripts botnet commands have been loaded."
 	source "$SBScriptsModules/botnet/receivers.tcl"
 	putlog "SBScripts botnet recievers have been loaded."
-	return 0
-	}
 source "$SBScriptsModules/channel/commands.tcl"
 	putlog "SBScripts channel commands have been loaded."
 source "$SBScriptsRoot/VERSION"
