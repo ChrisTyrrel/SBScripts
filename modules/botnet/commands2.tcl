@@ -27,7 +27,7 @@ global AdminChan Owner MainChan
 		} elseif {$cmd == "announce"} {
 			set announcemsg [lrange $text 1 end]
 				putnow "PRIVMSG $AdminChan :$nick is globally announcing ($announcemsg)"
-				putnow "PRIVMSG $MainChan :\002Announcement\002 from \002$nick\002 : \026$announcemsg\026"
+				putnow "PRIVMSG $MainChan :\002Announcement\002 from \002$nick\002 : $announcemsg"
 				putallbots "GLOBAL ANNOUNCE $nick $announcemsg"
 				putnow "PRIVMSG $AdminChan :Announcement has been made locally."
 		
