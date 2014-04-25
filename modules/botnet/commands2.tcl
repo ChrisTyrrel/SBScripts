@@ -63,6 +63,10 @@ global AdminChan Owner MainChan
 				newchanban $MainChan $o2b $nick $r4b $t2b
 				putnow "PRIVMSG $AdminChan :Ban has been applied locally."
 		
+		} elseif {$cmd == "version"} {
+				putnow "PRIVMSG $AdminChan :Global version check has been initiated by $nick."
+				putallbots "GLOBAL VERSION $nick"
+		
 		} else {
 			putnow "PRIVMSG $AdminChan :The command ($cmd) doesn't exist."
 			}
