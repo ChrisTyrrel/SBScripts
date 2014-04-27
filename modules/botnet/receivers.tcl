@@ -17,10 +17,10 @@
 bind bot - GLOBAL bot:GLOBAL
 
 proc bot:GLOBAL {from-bot command text} {
-Global AdminChan MainChan SBScriptsVersion network
+global AdminChan MainChan SBScriptsVersion network
 	set command [lindex $text 0]
 	set nick [lindex $text 1]
-		if {$command == "rehash} {
+		if {$command == "rehash"} {
 			putnow "PRIVMSG $AdminChan :Global rehash initiated by $nick."
 				rehash
 			putnow "PRIVMSG $AdminChan :Local bot has been rehashed.
