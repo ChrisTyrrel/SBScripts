@@ -20,26 +20,26 @@ proc bot:GLOBAL {from-bot command text} {
 global AdminChan MainChan SBScriptsVersion network
 	set command [lindex $text 0]
 	set nick [lindex $text 1]
-		if {$command == "rehash"} {
+		if {$command == "REHASH"} {
 			putnow "PRIVMSG $AdminChan :Global rehash initiated by $nick."
 				rehash
-			putnow "PRIVMSG $AdminChan :Local bot has been rehashed.
+			putnow "PRIVMSG $AdminChan :Local bot has been rehashed."
 			
-		} elseif {$command == "announce"} {
+		} elseif {$command == "ANNOUNCE"} {
 			set announcemsg [lrange $text 2 end]
 				putnow "PRIVMSG $MainChan :\002Announcement\002 from \002$nick\002 : $announcemsg"
 			
-		} elseif {$command == "shutdown"} {
+		} elseif {$command == "SHUTDOWN"} {
 			putnow "PRIVMSG $AdminChan :Global shutdown initiated by $nick."
 			putnow "PRIVMSG $AdminChan :Shutting down."
 			die "Shutdown by $nick"
 		
-		} elseif {$command == "restart"} {
+		} elseif {$command == "RESTART"} {
 			putnow "PRIVMSG $AdminChan :Global restart initiated by $nick."
 			putnow "PRIVMSG $AdminChan :Restarting."
 			restart
 		
-		} elseif {$command == "topic"} {
+		} elseif {$command == "TOPIC"} {
 			set topic [lrange $text 2 end]
 				putnow "TOPIC $MainChan :$topic"
 				
@@ -50,17 +50,17 @@ global AdminChan MainChan SBScriptsVersion network
 				putnow "PRIVMSG $AdminChan :Global ban on $o2b on $MainChan has been activated by $nick."
 				newchanban $MainChan $nick $o2b $r4b $t2b
 		
-		} elseif {$command == "version"} {
+		} elseif {$command == "VERSION"} {
 			putbot $from-bot "GLOBAL VERSIONR $network $SBScriptsVersion"
 			
-		} elseif {$command == "versionr"} {
+		} elseif {$command == "VERSIONR"} {
 			set network [lindex $text 2]
 			set version [lindex $text 3]
 				putnow "PRIVMSG $AdminChan :$network: $version"
-		} elseif {$command == "ping"} {
+		} elseif {$command == "PING"} {
 			putbot $from-bot "GLOBAL PONG $network"
 		
-		} elseif {$command == "pong"} {
+		} elseif {$command == "PONG"} {
 			set network [lindex $text 2]
 			putnow "PRIVMSG $AdminChan :$network: PONG"
 			
