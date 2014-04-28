@@ -17,7 +17,7 @@
 bind pub m !g pub:global
 proc pub:global {nick host hand chan text} {
 global AdminChan Owner MainChan
-	set cmd [lindex $text 0]
+	set cmd [string tolower [lindex $text 0]]
 		if {$cmd == "rehash"} {
 			putnow "PRIVMSG $AdminChan :Global rehash initiated by $nick."
 			putallbots "GLOBAL REHASH $nick"
