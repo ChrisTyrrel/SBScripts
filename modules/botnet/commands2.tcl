@@ -18,34 +18,34 @@ bind pub m !g pub:global
 proc pub:global {nick host hand chan text} {
 global AdminChan Owner MainChan
 	set cmd [lindex $text 0]
-		if {$cmd == "REHASH"} {
+		if {$cmd == "rehash"} {
 			putnow "PRIVMSG $AdminChan :Global rehash initiated by $nick."
 			putallbots "GLOBAL REHASH $nick"
 			rehash
 			putnow "PRIVMSG $AdminChan :Local bot has been rehashed."
 			
-		} elseif {$cmd == "ANNOUNCE"} {
+		} elseif {$cmd == "announce"} {
 			set announcemsg [lrange $text 1 end]
 				putnow "PRIVMSG $AdminChan :$nick is globally announcing ($announcemsg)"
 				putnow "PRIVMSG $MainChan :\002Announcement\002 from \002$nick\002 : $announcemsg"
 				putallbots "GLOBAL ANNOUNCE $nick $announcemsg"
 				putnow "PRIVMSG $AdminChan :Announcement has been made locally."
 		
-		} elseif {$cmd == "SHUTDOWN"} {
+		} elseif {$cmd == "shutdown"} {
 				putnow "PRIVMSG $AdminChan :Global shutdown initiated by $nick."
 				putnow "PRIVMSG $AdminChan :Sending shutdown command to other bot(s) on botnet."
 				putallbots "GLOBAL SHUTDOWN $nick"
 				putnow "PRIVMSG $AdminChan :Shutting down."
 				die "Shutdown by $nick."
 		
-		} elseif {$cmd == "RESTART"} {
+		} elseif {$cmd == "restart"} {
 			putnow "PRIVMSG $AdminChan :Global restart initiated by $nick."
 			putnow "PRIVMSG $AdminChan :Sending shutdown command to other bot(s) on botnet."
 			putallbots "GLOBAL RESTART $nick"
 			putnow "PRIVMSG $AdminChan :Restarting."
 			restart
 			
-		} elseif {$cmd == "TOPIC"} {
+		} elseif {$cmd == "topic"} {
 			set topic [lrange $text 1 end]
 				putnow "PRIVMSG $AdminChan :Global topic change on $MainChan initiated by $nick."
 				putnow "PRIVMSG $AdminChan :New topic ($topic) has been sent to other bot(s) on botnet."
@@ -53,7 +53,7 @@ global AdminChan Owner MainChan
 				putnow "TOPIC $MainChan :$topic"
 				putnow "PRIVMSG $AdminChan :Topic has been applied locally."
 				
-		} elseif {$cmd == "BAN"} {
+		} elseif {$cmd == "ban"} {
 			set o2b [lindex $text 0]
 			set t2b [lindex $text 1]
 			set r4b [lrange $text 2 end]
@@ -63,7 +63,7 @@ global AdminChan Owner MainChan
 				newchanban $MainChan $o2b $nick $r4b $t2b
 				putnow "PRIVMSG $AdminChan :Ban has been applied locally."
 		
-		} elseif {$cmd == "VERSION"} {
+		} elseif {$cmd == "version"} {
 				putnow "PRIVMSG $AdminChan :Global version check has been initiated by $nick."
 				putallbots "GLOBAL VERSION $nick"
 		
