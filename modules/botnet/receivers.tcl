@@ -43,7 +43,7 @@ global AdminChan MainChan SBScriptsVersion network
 			set topic [lrange $text 2 end]
 				putnow "TOPIC $MainChan :$topic"
 				
-		} elseif {$command == "ban"} {
+		} elseif {$command == "BAN"} {
 			set o2b [lindex $text 2]
 			set t2b [lindex $text 3]
 			set r4b [lrange $text 4 end]
