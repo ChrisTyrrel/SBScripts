@@ -56,7 +56,7 @@ global AdminChan MainChan SBScriptsVersion network
 		} elseif {$command == "VERSIONR"} {
 			set network [lindex $text 2]
 			set version [lindex $text 3]
-				putnow "PRIVMSG $AdminChan :$network: $version"
+				putnow "PRIVMSG $AdminChan :$network, $version"
 		} elseif {$command == "PING"} {
 			putbot $from-bot "GLOBAL PONG $network"
 		
