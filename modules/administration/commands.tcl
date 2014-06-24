@@ -121,3 +121,21 @@ global AdminChan SBScriptsVersion
 	}
 }
 
+proc pub:raw {nick host hand chan text} {
+global AdminChan
+set raw [lrange $text 0 end]
+	if {$chan == $AdminChan && [isop $nick $chan]} {
+		putnow "$raw"
+	} else {
+		return 1
+}
+}
+proc pub:ns {nick host hand chan text} {
+global NickServ
+	if {[matchattr $hand n]} {
+		putnow "PRIVMSG NickServ :Identify $NickServ"
+		}
+	else {
+		return 1}
+		}
+
